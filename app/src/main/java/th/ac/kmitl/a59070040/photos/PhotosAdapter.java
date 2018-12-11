@@ -44,15 +44,6 @@ public class PhotosAdapter extends ArrayAdapter<Photos> {
         Photos row = photosList.get(position);
         id.setText(String.valueOf(row.getId()));
         title.setText(row.getTitle());
-//        try {
-//            URL url = new URL(row.getThumbnail());
-//            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//            image.setImageBitmap(bmp);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
         return photosItem;
     }
