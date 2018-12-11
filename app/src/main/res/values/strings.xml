@@ -10,4 +10,8 @@
     <string name="profilesetup">Profile Setup</string>
     <string name="myfriends">My Friends</string>
     <string name="signout">Sign Out</string>
+    <string name="back">Back</string>
+    <string name="todos">Todos</string>
+    <string name="post">Post</string>
+    <string name="albums">Albums</string>
 </resources>
