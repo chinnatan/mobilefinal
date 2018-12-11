@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">mobilefinal</string>
+    
+    <string name="usernameHint">User Id</string>
+    <string name="passwordHint">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register New Account</string>
+</resources>
