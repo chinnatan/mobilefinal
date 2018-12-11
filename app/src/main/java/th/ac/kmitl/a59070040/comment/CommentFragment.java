@@ -1,15 +1,13 @@
-package th.ac.kmitl.a59070040.post;
+package th.ac.kmitl.a59070040.comment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -26,41 +24,40 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import th.ac.kmitl.a59070040.R;
-import th.ac.kmitl.a59070040.comment.CommentFragment;
-import th.ac.kmitl.a59070040.friend.Friend;
-import th.ac.kmitl.a59070040.friend.MyFriendFragment;
+import th.ac.kmitl.a59070040.post.Post;
+import th.ac.kmitl.a59070040.post.PostAdapter;
 
-public class PostFragment extends Fragment {
+public class CommentFragment extends Fragment {
 
-    private static final String TAG = "POST";
+    private static final String TAG = "COMMENT";
 
     private String url;
-    private ArrayList<Post> postArrayList = new ArrayList<>();
-    private ListView postList;
-    private PostAdapter postAdapter;
+    private ArrayList<Comment> commentArrayList = new ArrayList<>();
+    private ListView commentList;
+    private CommentAdapter commentAdapter;
 
     private Button zBack;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_post, container, false);
+        return inflater.inflate(R.layout.fragment_comment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        postFragmentElements();
+        commentFragmentElements();
         initBack();
 
         Bundle bundle;
         bundle = getArguments();
-        final int userId = bundle.getInt("userId");
+        final int postId = bundle.getInt("postId");
 
-        url = "https://jsonplaceholder.typicode.com/users/" + userId + "/posts";
+        url = "https://jsonplaceholder.typicode.com/posts/" + postId + "/comments";
 
-        postList = getView().findViewById(R.id.post_list);
-        postAdapter = new PostAdapter(getActivity(), R.layout.fragment_post_item, postArrayList);
+        commentList = getView().findViewById(R.id.comment_list);
+        commentAdapter = new CommentAdapter(getActivity(), R.layout.fragment_comment_item, commentArrayList);
 
         try {
             OkHttpClient client = new OkHttpClient();
@@ -83,15 +80,15 @@ public class PostFragment extends Fragment {
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     try {
                                         JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                        Post post = new Post(jsonObject.getInt("id"), jsonObject.getString("title"), jsonObject.getString("body"));
-                                        postArrayList.add(post);
+                                        Comment comment = new Comment(jsonObject.getInt("postId"), jsonObject.getInt("id"), jsonObject.getString("body"), jsonObject.getString("name"), jsonObject.getString("email"));
+                                        commentArrayList.add(comment);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
 
-                                postAdapter.notifyDataSetChanged();
-                                postList.setAdapter(postAdapter);
+                                commentAdapter.notifyDataSetChanged();
+                                commentList.setAdapter(commentAdapter);
                             }
                         });
                     } catch (JSONException e) {
@@ -103,24 +100,10 @@ public class PostFragment extends Fragment {
         } catch (Exception e) {
             Log.d(TAG, e.getMessage());
         }
-
-        postList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Post post = (Post) parent.getAdapter().getItem(position);
-                Fragment fragment = new CommentFragment();
-                Bundle bundle = new Bundle();
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
-                bundle.putInt("postId", post.getId());
-                fragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.main_view, fragment);
-                fragmentTransaction.commit();
-            }
-        });
     }
 
-    private void postFragmentElements() {
-        zBack = getView().findViewById(R.id.post_backbtn);
+    private void commentFragmentElements() {
+        zBack = getView().findViewById(R.id.comment_backbtn);
     }
 
     private void initBack() {

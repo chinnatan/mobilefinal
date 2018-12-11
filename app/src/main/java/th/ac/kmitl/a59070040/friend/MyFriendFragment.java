@@ -78,7 +78,13 @@ public class MyFriendFragment extends Fragment {
         zPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new PostFragment()).addToBackStack(null).commit();
+                Fragment fragment = new PostFragment();
+                Bundle bundle = new Bundle();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
+                bundle.putInt("userId", userId);
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.main_view, fragment);
+                fragmentTransaction.commit();
             }
         });
     }
