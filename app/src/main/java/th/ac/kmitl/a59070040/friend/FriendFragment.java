@@ -26,7 +26,6 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import th.ac.kmitl.a59070040.HomeFragment;
 import th.ac.kmitl.a59070040.R;
 
 public class FriendFragment extends Fragment {
@@ -64,7 +63,7 @@ public class FriendFragment extends Fragment {
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    Toast.makeText(getActivity(), "error - " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d(TAG,"error - " + e.getMessage());
                 }
 
                 @Override

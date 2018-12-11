@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,13 @@ public class MyFriendFragment extends Fragment {
         zTodos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new TodosFragment()).addToBackStack(null).commit();
+                Fragment fragment = new TodosFragment();
+                Bundle bundle = new Bundle();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
+                bundle.putInt("userId", userId);
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.main_view, fragment);
+                fragmentTransaction.commit();
             }
         });
     }
