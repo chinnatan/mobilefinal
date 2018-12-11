@@ -93,7 +93,13 @@ public class MyFriendFragment extends Fragment {
         zAlbums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new AlbumsFragment()).addToBackStack(null).commit();
+                Fragment fragment = new AlbumsFragment();
+                Bundle bundle = new Bundle();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
+                bundle.putInt("userId", userId);
+                fragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.main_view, fragment);
+                fragmentTransaction.commit();
             }
         });
     }

@@ -6,14 +6,14 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/albums_title_warp"
+        android:id="@+id/photos_title_warp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
 
         <Button
-            android:id="@+id/albums_backbtn"
+            android:id="@+id/photos_backbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/back" />
@@ -26,7 +26,7 @@
         android:fillViewport="true"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/albums_title_warp">
+        app:layout_constraintTop_toBottomOf="@id/photos_title_warp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:orientation="vertical">
 
             <ListView
-                android:id="@+id/albums_list"
+                android:id="@+id/photos_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"></ListView>
 
