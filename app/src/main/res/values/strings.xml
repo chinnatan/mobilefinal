@@ -5,4 +5,6 @@
     <string name="passwordHint">Password</string>
     <string name="login">Login</string>
     <string name="register">Register New Account</string>
+    <string name="fullname">Name</string>
+    <string name="age">Age</string>
 </resources>
